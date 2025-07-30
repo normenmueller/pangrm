@@ -167,12 +167,15 @@ See [extending Pangrm](doc/ext.md) for details.
 ## FAQ
 
 > **Q:** Is Pangrm a GUI modeling tool?
+> 
 > **A:** No. Pangrm is a backend tool. Think of it like Pandoc, but for graph models.
 
 > **Q:** Can Pangrm handle lossy formats like images or SVG?
+> 
 > **A:** No, Pangrm is about **structural conversion** of models — not visual layout fidelity.
 
 > **Q:** How does Pangrm ensure roundtrip safety?
+> 
 > **A:** Via normalized graph IR and test-based verification.
 
 ## License
