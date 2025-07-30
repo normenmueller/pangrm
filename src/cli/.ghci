@@ -1,0 +1,34 @@
+-- 📌 Enable common language extensions
+:set -XOverloadedStrings
+:set -XScopedTypeVariables
+:set -XLambdaCase
+
+-- 📌 Suppress unnecessary warnings
+:set -Wno-type-defaults
+:set -fno-warn-unused-do-bind
+
+-- 📌 Customize the GHCi prompt
+:set prompt "\ESC[1;35mλ>\ESC[m "
+:set prompt-cont "\ESC[1;35m >\ESC[m "
+
+-- 📌 Enable multi-line input
+:set +m
+
+-- 📌 Show type information automatically
+:set +t
+
+-- 📌 Import frequently used modules
+:module +Data.List
+:module +Data.Maybe
+:module +Control.Monad
+:module +Control.Applicative
+
+-- 📌 Define custom reload command
+:def! r \_ -> return ":reload\n:module +Data.List Data.Maybe Control.Monad"
+
+-- 📌 Automatically load and show history after startup
+:cmd return ":history"
+
+-- 📌 Clear screen before reloading a module (useful for cleaner output)
+:def! cls \_ -> return "System.Process.callCommand \"clear\""
+

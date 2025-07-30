@@ -1,0 +1,9 @@
+cradle:
+  cabal:
+    - path: "./src/app/"
+      component: "exe:pangrm"
+    - path: "./src/lib/"
+      component: "lib:pangrm-cli"
+    - path: "./tst/"
+      component: "test:pangrm-cli-test"
+

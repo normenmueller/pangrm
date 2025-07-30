@@ -1,0 +1,187 @@
+# Pangrm
+
+<!--
+
+Converter vs. Transformer
+
+In der Softwareentwicklung bezeichnet ein Converter typischerweise eine Komponente, die Daten von einem Typ oder Format in ein anderes überführt (z.B. DTO ↔ Entity), während ein Transformer oft komplexere Anpassungen oder strukturelle Änderungen an Daten vornimmt, etwa Mapping mit Logik oder Kontextbezug (vgl. Fowler, Patterns of Enterprise Application Architecture, 2002).
+
+-->
+
+> **Pangrm** /ˈpæn.ɡræm/ — The universal graph model converter
+> Inspired by [Pandoc](https://github.com/jgm/pandoc), **Pangrm** lets you convert **graph-based models** across diverse formats — reliably, reproducibly, and type-safely.
+
+## What is Pangrm?
+
+**Pangrm** is a Haskell-based library and CLI tool for **converting graph models** from one format to another.
+
+The name *Pangrm* stands for **Pan** (*universal*) + **GRM** (*GRAph Model*), reflecting its core purpose:
+
+> *Universal graph model conversion.*
+
+Just like [Pandoc](https://github.com/jgm/pandoc) provides universal document conversion, **Pangrm** aims to do the same for **graph-based modeling formats** — such as `.dot`, `.bpmn`, `.archimate`, and more.
+
+## Why Pangrm?
+
+- Modeling tools are fragmented.
+- Formats are incompatible.
+- Round-trip conversion is error-prone.
+
+With **Pangrm - The universal model converter**, we aim to make graph model processing as seamless and versatile as [Pandoc](https://github.com/jgm/pandoc) did for documents.
+
+**Pangrm provides:**
+
+- 🧩 **Modular architecture** — Easily plug in new formats
+- ✅ **Type safety** — Every conversion step is typed and verifiable
+- 🔁 **Roundtrip capability** — Parse → Normalize → Render (back and forth)
+- 📦 **CLI & Library** — Use it as a developer or in pipelines
+- 🧪 **Comprehensive test suite** — Roundtrip fidelity and edge-case safety
+- 🔗 **Inspired by Pandoc**[^1] — Familiar concepts, stricter semantics
+
+[^1]: Pangrm owes significant conceptual inspiration to [Pandoc](https://github.com/jgm/pandoc), particularly its modular format architecture, reader/writer abstraction, and normalized intermediate representation. Sincere thanks to John MacFarlane and contributors for their foundational work.
+
+## Supported Formats
+
+Pangrm currently supports parsing and writing the following formats:
+
+| Tag        | Format                                         |
+|------------|------------------------------------------------|
+| `dot`      | [GraphViz](https://graphviz.org/)              |
+| `cql`      | Cypher (e.g. Neo4j)                            |
+| `puml`     | [PlantUML](https://plantuml.com/)              |
+| `mxg`      | [MXGraph](https://jgraph.github.io/mxgraph/)   |
+| `amx`      | [ArchiMate Model Exchange](https://www.opengroup.org/open-group-archimate-model-exchange-file-format) |
+| `ldif`     | [LeanIX Data Interchange](https://docs-eam.leanix.net/reference/integration-api) |
+| `bpmn`     | [Business Process Model and Notation](https://www.bpmn.org/) |
+| `archimate`| [ArchiMate Tool](https://www.archimatetool.com/) |
+
+More formats can be added via a clean extension mechanism.
+
+## How It Works
+
+```text
+         Text         Text
+          ↓            ↑
+      [Reader]      [Writer]
+          ↓            ↑
+      AST Format    AST Format
+          ↓            ↑
+      [Graph as normalized IR]
+```
+
+Pangrm converts from **textual input** → **format-specific AST** → **normalized graph IR** ...and back again. Every supported format implements a `Reader` and `Writer` interface.
+
+## Installation
+
+You'll need **GHC** and **Cabal**.
+
+### Clone the Repository
+
+```bash
+git clone https://github.com/normenmueller/pangrm.git
+cd ./pangrm
+```
+
+### Build & Install using `make` (recommended)
+
+```bash
+make
+```
+
+This will:
+
+1. Clean old builds
+2. Build the core lib (`pangrm`) and CLI (`pangrm-cli`)
+3. Run tests
+4. Install both via Cabal
+
+### Manual Build (without Make)
+
+```bash
+cabal update
+cabal clean
+```
+
+Then:
+
+```bash
+cd lib/
+cabal build --enable-tests
+cabal test
+cabal install
+cd ../cli/
+cabal build --enable-tests
+cabal test
+cabal install
+```
+
+✅ Pangrm is now ready to use!
+
+## Usage
+
+Pangrm consists of two components:
+
+- **[`pangrm-lib`](src/lib/README.md)** — the core graph modeling library
+- **[`pangrm-cli`](src/cli/README.md)** — the CLI tool
+
+Example:
+
+```bash
+pangrm --from ldif --to cql --input example.ldif --output example.cql
+```
+
+To see all options:
+
+```bash
+pangrm --help
+```
+
+## Contributing
+
+We welcome contributions!
+
+### Guidelines
+
+- Follow idiomatic Haskell style
+- Run `hlint` and `fourmolu`
+- Write tests for new features
+- Document public interfaces
+- Prefer total functions and safe types
+
+Before submitting:
+
+```bash
+cabal test --enable-tests
+```
+
+### Format Plugin Example
+
+To add a new format:
+
+1. Define a `HasAST` instance
+2. Implement a `Reader` and/or `Writer`
+3. Register it in the Pangrm registry
+
+See [extending Pangrm](doc/ext.md) for details.
+
+## FAQ
+
+> **Q:** Is Pangrm a GUI modeling tool?
+> 
+> **A:** No. Pangrm is a backend tool. Think of it like Pandoc, but for graph models.
+
+> **Q:** Can Pangrm handle lossy formats like images or SVG?
+> 
+> **A:** No, Pangrm is about **structural conversion** of models — not visual layout fidelity.
+
+> **Q:** How does Pangrm ensure roundtrip safety?
+> 
+> **A:** Via normalized graph IR and test-based verification.
+
+## License
+
+See [LICENSE](./LICENSE)
+© 2025 [normenmueller](https://github.com/normenmueller)
+
+Made with ❤️  in Haskell.
+
