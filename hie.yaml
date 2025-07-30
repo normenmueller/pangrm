@@ -1,0 +1,22 @@
+cradle:
+  multi:
+    - path: "./src/cli/"
+      config:
+        cradle:
+          cabal:
+            - path: "./src/cli/src/app/"
+              component: "exe:pangrm"
+            - path: "./src/cli/src/lib/"
+              component: "lib:pangrm-cli"
+            - path: "./src/cli/tst/"
+              component: "test:pangrm-cli-test"
+
+    - path: "./lib/"
+      config:
+        cradle:
+          cabal:
+            - path: "./src/lib/src"
+              component: "lib:pangrm"
+            - path: "./src/lib/tst"
+              component: "test:pangrm-test"
+
