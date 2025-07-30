@@ -1,0 +1,95 @@
+cabal-version:        3.0
+name:                 pangrm
+version:              0.1.0.0
+build-type:           Simple
+license:              GPL-3.0-or-later
+license-file:         LICENSE
+copyright:            © 2025 nemron
+author:               Normen Müller (nemron) <normen.mueller@gmail.com>
+maintainer:           Normen Müller (nemron) <normen.mueller@gmail.com>
+stability:            alpha
+
+synopsis:             ...
+description:          The goal of ...
+
+extra-doc-files:      README.md
+
+source-repository head
+  type:          git
+  location:      https://github.com/normenmueller/pangrm.git
+
+common warnings
+    ghc-options:      -Wall -O2 -optl-Wl,-w
+
+library
+    import:           warnings
+    hs-source-dirs:   src
+    exposed-modules:  Pangrm
+                      Pangrm.Core
+                      Pangrm.Core.Graph
+                      Pangrm.Core.Graph.Types
+                      Pangrm.Core.Graph.Utils
+                      Pangrm.Core.Graph.Optics
+                      Pangrm.Core.Format
+                      Pangrm.Core.PangrmMonad
+                      Pangrm.Core.PangrmState
+                      Pangrm.Formats.Cql
+                      Pangrm.Formats.Cql.Format
+                      Pangrm.Formats.Cql.Reader
+                      Pangrm.Formats.Cql.Writer
+                      Pangrm.Formats.Ldif
+                      Pangrm.Formats.Ldif.Format
+                      Pangrm.Formats.Ldif.Reader
+                      Pangrm.Formats.Ldif.Writer
+                      Pangrm.Registry
+                      Pangrm.Shared
+                      Pangrm.Shared.Error
+                      Pangrm.Shared.Logging
+                      Pangrm.Shared.Options
+    build-depends:    base                        >=4.18  && <4.19,
+
+                      fgl                         >=5.8.3 && <5.9,
+
+                      mtl                         >=2.3   && <2.4,
+
+                      optics                      >=0.4   && <0.5,
+                      optics-th                   >=0.4   && <0.5,
+                      microlens                   >=0.4   && <0.5,
+
+                      text                        >=1.2   && <1.3,
+                      scientific                  >=0.3   && <0.4,
+                      bytestring                  >=0.12  && <0.13,
+                      containers                  >=0.7   && <0.8,
+                      data-default                >=0.8   && <0.9,
+
+                      prettyprinter               >=1.7   && <1.8,
+                      prettyprinter-ansi-terminal >=1.1   && <1.2
+    default-language: Haskell2010
+
+test-suite pangrm-test
+    import:           warnings
+    default-language: Haskell2010
+    type:             exitcode-stdio-1.0
+    hs-source-dirs:   tst
+    main-is:          Main.hs
+    other-modules:    Specs.GraphSpec
+    build-depends:    base                        >=4.18  && <4.19,
+                      hspec                      ^>=2.11.10,
+                      pangrm,
+
+                      fgl                         >=5.8.3 && <5.9,
+
+                      mtl                         >=2.3   && <2.4,
+
+                      optics                      >=0.4   && <0.5,
+                      optics-th                   >=0.4   && <0.5,
+                      microlens                   >=0.4   && <0.5,
+
+                      text                        >=1.2   && <1.3,
+                      scientific                  >=0.3   && <0.4,
+                      bytestring                  >=0.12  && <0.13,
+                      containers                  >=0.7   && <0.8,
+                      data-default                >=0.8   && <0.9,
+
+                      prettyprinter               >=1.7   && <1.8,
+                      prettyprinter-ansi-terminal >=1.1   && <1.2
