@@ -156,9 +156,10 @@ cabal test --enable-tests
 
 To add a new format:
 
-1. Define a `HasAST` instance
-2. Implement a `Reader` and/or `Writer`
-3. Register it in the Pangrm registry
+1. Define your format
+2. Implement your format specific `Reader` *and* `Writer`
+3. Register your format in the Pangrm registry
+4. Test your format normalization
 
 See [extending Pangrm](doc/ext.md) for details.
 
@@ -170,7 +171,7 @@ See [extending Pangrm](doc/ext.md) for details.
 
 > **Q:** Can Pangrm handle lossy formats like images or SVG?
 >
-> **A:** No, Pangrm is about **structural conversion** of models — not visual layout fidelity.
+> **A:** No, Pangrm is about *structural conversion of graph models* — not visual layout fidelity.
 
 > **Q:** How does Pangrm ensure roundtrip safety?
 >
