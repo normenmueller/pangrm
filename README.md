@@ -44,16 +44,16 @@ With **Pangrm - The universal model converter**, we aim to make graph model proc
 
 Pangrm currently supports parsing and writing the following formats:
 
-| Tag        | Format                                         |
-|------------|------------------------------------------------|
-| `dot`      | [GraphViz](https://graphviz.org/)              |
-| `cql`      | Cypher (e.g. Neo4j)                            |
-| `puml`     | [PlantUML](https://plantuml.com/)              |
-| `mxg`      | [MXGraph](https://jgraph.github.io/mxgraph/)   |
-| `amx`      | [ArchiMate Model Exchange](https://www.opengroup.org/open-group-archimate-model-exchange-file-format) |
-| `ldif`     | [LeanIX Data Interchange](https://docs-eam.leanix.net/reference/integration-api) |
-| `bpmn`     | [Business Process Model and Notation](https://www.bpmn.org/) |
-| `archimate`| [ArchiMate Tool](https://www.archimatetool.com/) |
+| Tag        | Format |
+|------------|--------|
+| `dot`      | The [GraphViz](https://graphviz.org/) file format |
+| `cql`      | [Cypher](https://neo4j.com/docs/cypher-manual/current/introduction/), [Neo4j](https://neo4j.com/)'s declarative query language |
+| `puml`     | The [PlantUML](https://plantuml.com/) file format |
+| `mxg`      | The [MXGraph](https://jgraph.github.io/mxgraph/) file format |
+| `amx`      | The [OpenGroup](https://www.opengroup.org/) [ArchiMate Model Exchange](https://www.opengroup.org/open-group-archimate-model-exchange-file-format) file format |
+| `ldif`     | The [SAP LeanIX](https://www.leanix.net/en/) [LeanIX Data Interchange](https://docs-eam.leanix.net/reference/integration-api) file format |
+| `bpmn`     | The [OMG](https://www.omg.org/) [Business Process Model and Notation](https://www.bpmn.org/) file format |
+| `archimate`| The [ArchiMate Tool](https://www.archimatetool.com/) proprietary file format |
 
 More formats can be added via a clean extension mechanism.
 
@@ -167,15 +167,15 @@ See [extending Pangrm](doc/ext.md) for details.
 ## FAQ
 
 > **Q:** Is Pangrm a GUI modeling tool?
-> 
+>
 > **A:** No. Pangrm is a backend tool. Think of it like Pandoc, but for graph models.
 
 > **Q:** Can Pangrm handle lossy formats like images or SVG?
-> 
+>
 > **A:** No, Pangrm is about **structural conversion** of models — not visual layout fidelity.
 
 > **Q:** How does Pangrm ensure roundtrip safety?
-> 
+>
 > **A:** Via normalized graph IR and test-based verification.
 
 ## License
