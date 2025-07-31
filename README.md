@@ -6,6 +6,14 @@ Converter vs. Transformer
 
 In der Softwareentwicklung bezeichnet ein Converter typischerweise eine Komponente, die Daten von einem Typ oder Format in ein anderes überführt (z.B. DTO ↔ Entity), während ein Transformer oft komplexere Anpassungen oder strukturelle Änderungen an Daten vornimmt, etwa Mapping mit Logik oder Kontextbezug (vgl. Fowler, Patterns of Enterprise Application Architecture, 2002).
 
+Unify vs. Normalize
+
+**Normalize**: Der Fokus liegt auf Standardisierung. Heterogene Eingabeformate werden geglättet, redundante oder überflüssige Strukturen entfernt, und das Ergebnis in ein kanonisches Format überführt. Der Begriff impliziert vor allem das Angleichen von Formaten, jedoch ohne notwendigerweise eine gemeinsame semantische Abstraktion zu schaffen.
+
+**Unify**: Hier steht das Zusammenführen unterschiedlicher Konzepte in ein gemeinsames, abstraktes Modell im Vordergrund. Es geht nicht nur um Standardisierung, sondern um die Transformation und Abbildung verschiedenartiger Strukturen auf ein einheitliches, semantisch kohärentes Modell.
+
+Im Kontext von Pangrm bezeichnet "Unify" die Konvertierung eines spezifischen, parserabhängigen abstrakten Syntaxbaums in einen formatunabhängigen, einheitlichen Pangrm-Graphen. Der Begriff "Normalize" wäre hier zu eng gefasst, da er eher einfache Strukturangleichungen als umfassende semantische Vereinheitlichung impliziert.
+
 -->
 
 > **Pangrm** /ˈpæn.ɡræm/ — The universal graph model converter
@@ -27,13 +35,13 @@ Just like [Pandoc](https://github.com/jgm/pandoc) provides universal document co
 - Formats are incompatible.
 - Round-trip conversion is error-prone.
 
-With **Pangrm - The universal model converter**, we aim to make graph model processing as seamless and versatile as [Pandoc](https://github.com/jgm/pandoc) did for documents.
+With **Pangrm – The universal graph model converter**, graph model processing is intended to become as seamless and versatile as [Pandoc](https://github.com/jgm/pandoc) made it for documents.
 
 **Pangrm provides:**
 
-- 🧩 **Modular architecture** — Easily plug in new formats
+- 🧩 **Modular architecture** — Easily plug in new formats (cf. [How to Add a New Pangrm Format](./doc/ext.md)
 - ✅ **Type safety** — Every conversion step is typed and verifiable
-- 🔁 **Roundtrip capability** — Parse → Normalize → Render (back and forth)
+- 🔁 **Roundtrip capability** — Parse → Unify → Render (back and forth)
 - 📦 **CLI & Library** — Use it as a developer or in pipelines
 - 🧪 **Comprehensive test suite** — Roundtrip fidelity and edge-case safety
 - 🔗 **Inspired by Pandoc**[^1] — Familiar concepts, stricter semantics
@@ -66,10 +74,10 @@ More formats can be added via a clean extension mechanism.
           ↓            ↑
       AST Format    AST Format
           ↓            ↑
-      [Graph as normalized IR]
+      [Graph as unified IR]
 ```
 
-Pangrm converts from **textual input** → **format-specific AST** → **normalized graph IR** ...and back again. Every supported format implements a `Reader` and `Writer` interface.
+Pangrm converts from **textual input** → **format-specific AST** → **unified graph IR** ...and back again. Every supported format implements a `Reader` and `Writer` interface.
 
 ## Installation
 
@@ -176,7 +184,7 @@ See [extending Pangrm](doc/ext.md) for details.
 
 > **Q:** How does Pangrm ensure roundtrip safety?
 >
-> **A:** Via normalized graph IR and test-based verification.
+> **A**: By relying on the "*normalizable*" nature of Pangrm formats — each format is both readable and writable, enabling safe roundtrips.
 
 ## License
 
