@@ -1,21 +1,5 @@
 # Pangrm
 
-<!--
-
-Converter vs. Transformer
-
-In der Softwareentwicklung bezeichnet ein Converter typischerweise eine Komponente, die Daten von einem Typ oder Format in ein anderes überführt (z.B. DTO ↔ Entity), während ein Transformer oft komplexere Anpassungen oder strukturelle Änderungen an Daten vornimmt, etwa Mapping mit Logik oder Kontextbezug (vgl. Fowler, Patterns of Enterprise Application Architecture, 2002).
-
-Unify vs. Normalize
-
-**Normalize**: Der Fokus liegt auf Standardisierung. Heterogene Eingabeformate werden geglättet, redundante oder überflüssige Strukturen entfernt, und das Ergebnis in ein kanonisches Format überführt. Der Begriff impliziert vor allem das Angleichen von Formaten, jedoch ohne notwendigerweise eine gemeinsame semantische Abstraktion zu schaffen.
-
-**Unify**: Hier steht das Zusammenführen unterschiedlicher Konzepte in ein gemeinsames, abstraktes Modell im Vordergrund. Es geht nicht nur um Standardisierung, sondern um die Transformation und Abbildung verschiedenartiger Strukturen auf ein einheitliches, semantisch kohärentes Modell.
-
-Im Kontext von Pangrm bezeichnet "Unify" die Konvertierung eines spezifischen, parserabhängigen abstrakten Syntaxbaums in einen formatunabhängigen, einheitlichen Pangrm-Graphen. Der Begriff "Normalize" wäre hier zu eng gefasst, da er eher einfache Strukturangleichungen als umfassende semantische Vereinheitlichung impliziert.
-
--->
-
 > **Pangrm** /ˈpæn.ɡræm/ — The universal graph model converter
 > Inspired by [Pandoc](https://github.com/jgm/pandoc), **Pangrm** lets you convert **graph-based models** across diverse formats — reliably, reproducibly, and type-safely.
 
@@ -25,7 +9,9 @@ Im Kontext von Pangrm bezeichnet "Unify" die Konvertierung eines spezifischen, p
 
 The name *Pangrm* stands for **Pan** (*universal*) + **GRM** (*GRAph Model*), reflecting its core purpose:
 
-> *Universal graph model conversion.*
+> *Universal graph model conversion.*[^tgy]
+
+[^tgy]: Also cf. [Pangrm Terminology](./doc/tgy.md)
 
 Just like [Pandoc](https://github.com/jgm/pandoc) provides universal document conversion, **Pangrm** aims to do the same for **graph-based modeling formats** — such as `.dot`, `.bpmn`, `.archimate`, and more.
 
@@ -44,9 +30,9 @@ With **Pangrm – The universal graph model converter**, graph model processing 
 - 🔁 **Roundtrip capability** — Parse → Unify → Render (back and forth)
 - 📦 **CLI & Library** — Use it as a developer or in pipelines
 - 🧪 **Comprehensive test suite** — Roundtrip fidelity and edge-case safety
-- 🔗 **Inspired by Pandoc**[^1] — Familiar concepts, stricter semantics
+- 🔗 **Inspired by Pandoc**[^thx] — Familiar concepts, stricter semantics
 
-[^1]: Pangrm owes significant conceptual inspiration to [Pandoc](https://github.com/jgm/pandoc), particularly its modular format architecture, reader/writer abstraction, and normalized intermediate representation. Sincere thanks to John MacFarlane and contributors for their foundational work.
+[^thx]: Pangrm owes significant conceptual inspiration to [Pandoc](https://github.com/jgm/pandoc), particularly its modular format architecture, reader/writer abstraction, and normalized intermediate representation. Sincere thanks to John MacFarlane and contributors for their foundational work.
 
 ## Supported Formats
 
@@ -68,11 +54,15 @@ More formats can be added via a clean extension mechanism.
 ## How It Works
 
 ```text
+       [Reader]      [Writer]
+
          Text         Text
           ↓            ↑
-      [Reader]      [Writer]
+      [inject]      [render]
           ↓            ↑
       AST Format    AST Format
+          ↓            ↑
+       [unify]      [eject]
           ↓            ↑
       [Graph as unified IR]
 ```
