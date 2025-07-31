@@ -301,4 +301,9 @@ In the final step, you will **test your format end-to-end** and validate its beh
 
 tbd.
 
+<!--
+
+- Normalization
+
+-->
 
