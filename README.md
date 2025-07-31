@@ -67,7 +67,7 @@ More formats can be added via a clean extension mechanism.
       [Graph as unified IR]
 ```
 
-Pangrm converts from **textual input** → **format-specific AST** → **unified graph IR** ...and back again. Every supported format implements a `Reader` and `Writer` interface.
+Pangrm converts from **textual input** (→ **format-specific AST** → **unified graph IR** → **format-specific AST**) → **textual output**  ...and back again. Every supported format must implement both a `Reader` and a `Writer` interface. In other words, a Pangrm format must adhere to its defining property: it must be *normalizable* — i.e., both readable and writable.
 
 ## Installation
 
