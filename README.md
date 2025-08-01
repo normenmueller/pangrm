@@ -11,7 +11,7 @@ The name *Pangrm* stands for **Pan** (*universal*) + **GRM** (*GRAph Model*), re
 
 > *Universal graph model conversion.*[^tgy]
 
-[^tgy]: Also cf. [Pangrm Terminology](doc/tgy.md).
+[^tgy]: Also cf. [Pangrm Terminology](./doc/tgy.md)
 
 Just like [Pandoc](https://github.com/jgm/pandoc) provides universal document conversion, **Pangrm** aims to do the same for **graph-based modeling formats** — such as `.dot`, `.bpmn`, `.archimate`, and more.
 
@@ -180,7 +180,7 @@ See [extending Pangrm](doc/ext.md) for details.
 ## License
 
 See [LICENSE](./LICENSE)
-© 2025 [normenmueller](https://github.com/normenmueller)
+© 2025 [nemron](https://github.com/normenmueller)
 
 Made with ❤️  in Haskell.
 

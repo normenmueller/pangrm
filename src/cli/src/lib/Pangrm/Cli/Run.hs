@@ -50,7 +50,6 @@ import Control.Monad.Except
 import Control.Monad.Reader
 import Control.Monad.State
 import Data.Default
-import Prettyprinter
 import Prettyprinter.Render.Terminal (putDoc)
 
 import Pangrm.Core
@@ -95,7 +94,8 @@ instance PangrmMonad PangrmIO where
   getState = PangrmIO $ lift get
   putState = PangrmIO . lift . put
   --logOutput = liftIO . (PP.hPutDoc stderr . (<> line) . pretty)
-  logOutput = liftIO . putDoc . (<> line) . renderLogMsg
+  --logOutput = liftIO . putDoc . (<> line) . renderLogMsg
+  logOutput = liftIO . putDoc . renderLogMsg
 
 -- | Pangrm CLI monad with access to CLI options and Pangrm state.
 --

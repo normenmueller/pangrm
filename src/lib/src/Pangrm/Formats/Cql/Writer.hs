@@ -34,6 +34,6 @@ writer =
         \opts _ast ->
           if opts ^. woPrettify
             then report (LogDebug "-- pretty CQL output:\n") >> return mempty
-            else report (LogDebug "-- compact CQL output:") >> return mempty
+            else report (LogDebug "-- compact CQL output:\n") >> return mempty
     }
 
