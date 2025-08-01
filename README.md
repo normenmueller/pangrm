@@ -140,17 +140,27 @@ We welcome contributions!
 
 ### Guidelines
 
-- Follow idiomatic Haskell style
-- Run `hlint` and `fourmolu`
-- Write tests for new features
+- Follow idiomatic Haskell style & run `hlint`
+- Write tests for new features Before submitting:
+
+    ```bash
+    cabal test --enable-tests
+    ```
+
 - Document public interfaces
 - Prefer total functions and safe types
+- Work on feature branches and open PRs when ready.
 
-Before submitting:
-
-```bash
-cabal test --enable-tests
-```
+> Protected `trunk` branch
+>
+> The `trunk` branch is protected:
+>
+> - **No one (not even maintainers) can push directly to `trunk`.**
+> - All changes must go through a **Pull Request (PR)** with at least one review.
+> - **Only squash merges** are allowed to ensure a linear, clean commit history.
+> - Force-push and branch deletion are blocked.
+>
+> This guarantees stability, traceability, and a clear audit trail for all changes.
 
 ### Format Plugin Example
 
