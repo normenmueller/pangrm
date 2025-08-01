@@ -180,7 +180,7 @@ See [extending Pangrm](doc/ext.md) for details.
 ## License
 
 See [LICENSE](./LICENSE)
-© 2025 [normenmueller](https://github.com/normenmueller)
+© 2025 [nemron](https://github.com/normenmueller)
 
 Made with ❤️  in Haskell.
 
