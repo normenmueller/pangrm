@@ -33,8 +33,8 @@ This modular structure ensures clean responsibilities, testability, and extensib
 
 # Unified Pangrm Graph
 
-See [ADR-002](adl.md#adr-002-use-fgl-as-internal-graph-backend--wrap-with-clean-api)  
-See also [ADR-006](adl.md#adr-006-do-not-use-uuids-for-internal-graph-ids)
+See [ADR-001](adl.md#adr-001-use-fgl-as-internal-graph-backend--wrap-with-clean-api)
+See also [ADR-002](adl.md#adr-002-do-not-use-uuids-for-internal-graph-ids)
 
 ## Design Commitments
 
@@ -62,8 +62,8 @@ Note: we use `Int` node IDs instead of `UUID` to retain compatibility with `fgl`
 
 # Optics and Traversals
 
-Note: these rebuild the full graph on traversal.  
-See [ADR-002](adl.md#adr-002-use-fgl-as-internal-graph-backend--wrap-with-clean-api)
+Note: these rebuild the full graph on traversal.
+See [ADR-001](adl.md#adr-001-use-fgl-as-internal-graph-backend--wrap-with-clean-api)
 
 - Fine-grained `Lens'` accessors for all record fields
 - `Traversal'` for `allNodes`, `allEdges`, `allRelations`
@@ -74,7 +74,7 @@ allRelations :: Traversal' Graph RelInfo
 
 # Pangrm Monad and State
 
-See [ADR-003](adl.md#adr-003-enforce-reader--writer-separation-via-readerwriter-types)
+See [ADR-FMT-001](adl.md#adr-fmt-001-enforce-reader--writer-separation-via-readerwriter-types)
 
 The `PangrmMonad` class abstracts over:
 
@@ -95,7 +95,7 @@ class (Functor m, Applicative m, Monad, MonadError PangrmError m)
 
 # Error Classification
 
-See [ADR-001](adl.md#adr-001-keep-cli-graph-only--do-not-expose-ast-in-cli)
+See [ADR-CLI-001](adl.md#adr-cli-001-keep-cli-graph-only--do-not-expose-ast-in-cli)
 
 Clear distinction between intent- and phase-specific errors:
 
@@ -112,7 +112,7 @@ handleError :: Either PangrmError a -> IO a
 
 # Format Plugin System
 
-See [ADR-004](adl.md#adr-004-format-registry-uses-existential-wrapper-for-dynamic-dispatch)
+See [ADR-003](adl.md#adr-003-format-registry-uses-existential-wrapper-for-dynamic-dispatch)
 
 Pangrm supports statically registered format plugins via the `Registry` and `Roundtrippable` interface.
 
@@ -140,11 +140,11 @@ Registered entries are listed in `entries :: [Entry m]` and matched dynamically.
 
 # Reader and Writer Design
 
-See [ADR-003](adl.md#adr-003-enforce-reader--writer-separation-via-readerwriter-types)
+See [ADR-FMT-001](adl.md#adr-fmt-001-enforce-reader--writer-separation-via-readerwriter-types)
 
 ## Why AST?
 
-See [ADR-005](adl.md#adr-005-use-hasast--type-families-to-bind-format-to-ast)
+See [ADR-004](adl.md#adr-004-use-hasast--type-families-to-bind-format-to-ast)
 
 We distinguish between:
 
@@ -214,7 +214,7 @@ Writer f m = {
 
 ## Design Note: Typeclass-Only vs. Data-Driven
 
-See [ADR-004](adl.md#adr-004-format-registry-uses-existential-wrapper-for-dynamic-dispatch)
+See [ADR-003](adl.md#adr-003-format-registry-uses-existential-wrapper-for-dynamic-dispatch)
 
 Pangrm uses a hybrid approach:
 
@@ -234,7 +234,7 @@ This balances:
 
 # AST Requirements
 
-See [ADR-007](adl.md#adr-007-format-asts-must-be-functorfoldabletraversable)
+See [ADR-006](adl.md#adr-006-format-asts-must-be-functorfoldabletraversable)
 
 All `AST f a` types must be:
 
