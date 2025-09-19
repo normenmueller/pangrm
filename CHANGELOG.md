@@ -1,4 +1,4 @@
-# Revision history for scratch
+# Revision history
 
 ## 0.2 -- 2025-mm-dd
 

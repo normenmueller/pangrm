@@ -260,6 +260,37 @@ The AST is exported as a set of raw Cypher statements (`CREATE`, `MERGE`, `MATCH
 - Introduce CSV-based import with schema mapping for large-scale graphs
 - Validate exported Cypher files before import (e.g., static analysis)
 
+### ADR-CQL-002 (DRAFT): Relations must be created via MATCH
+
+Variablen wie `f` und `b` existieren **nur** innerhalb derselben Cypher-**Anweisung**, nicht transaktionübergreifend. Du kannst einen Knoten also nicht in Statement 1 anlegen und in Statement 3 mit demselben Variablennamen referenzieren – selbst in einer laufenden Transaktion sind Variablen lokal.
+
+Daher schlägt Dein drittes `CREATE (f)-[:CHILD]->(b)` fehl, weil in diesem Statement weder `f` noch `b` definiert sind. Um das sauber zu importieren, hast Du zwei Möglichkeiten:
+
+1. **Alles in einem Statement** anlegen:
+
+   ```cypher
+   CREATE
+     (f:Function {id:1, name:"main"}),
+     (b:Body     {id:2}),
+     (f)-[:CHILD]->(b);
+   ```
+
+   Das legt beide Knoten **und** ihre Beziehung in einem Rutsch an.
+
+2. **Separate Statements mit MATCH**:
+
+   ```cypher
+   CREATE (f:Function {id:1, name:"main"});
+   CREATE (b:Body     {id:2});
+   MATCH (f:Function {id:1}), (b:Body {id:2})
+   CREATE (f)-[:CHILD]->(b);
+   ```
+
+   Hier wird in Statement 3 mithilfe der Eigenschaften nach den schon angelegten Knoten gesucht.
+
+Wenn die Raw-Cypher-Datei passend geschrieben werden soll, muss man entweder **eine einzige `CREATE`-Anweisung** verwenden oder **immer `MATCH` auf eindeutigen Properties** (z. B. `id`) einsetzen. Nur so wird man konsistent denselben Graph importieren können.
+
+
 # Client
 
 ## ADR-CLI-001: Keep CLI Graph-Only — Do Not Expose AST in CLI
