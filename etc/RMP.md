@@ -1,7 +1,0 @@
-# Current Topic
-
-...
-
-# Roadmap
-
-...
